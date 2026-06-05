@@ -31,9 +31,3 @@ python rocket_simulation.py
 ## 📊 Sample Output Format
 The simulator outputs an evaluation summary alongside a data stride matrix mapping:
 `Time (s) | Altitude (m) | Velocity (m/s) | Acceleration (m/s²) | Fuel (kg) | Drag (N)`
-
-## 🗺️ Engineering Roadmap
-This engine serves as the foundational core. Future updates will focus on:
-- [ ] Integrating multi-stage rocket configurations (booster separation logic).
-- [ ] Adding 2D/3D visual flight path trajectory plotting.
-- [ ] Incorporating wind shear profiles and variable atmospheric weather systems.
