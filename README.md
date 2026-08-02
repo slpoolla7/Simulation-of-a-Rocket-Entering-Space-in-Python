@@ -1,33 +1,51 @@
-# 🚀 Multi-Variable Rocket Launch Simulator
+# 🚀 Moon Mission Simulation Engine (V2.0 - Reworked)
 
-A high-fidelity aerospace physics simulation engine written in Python. This application models sub-orbital rocket trajectories by calculating dynamic environmental forces in real time. Developed leveraging AI-assisted workflows, this repository represents Phase 1 of an ongoing project to construct a comprehensive aerospace telemetry simulator.
+A high-fidelity multi-phase aerospace physics engine written in Python. Moving beyond simple sub-orbital trajectories, this version tracks an entire flight profile from Earth launch to a controlled lunar landing, modelled after the historic **Apollo Saturn V** mission specifications.
 
-## 🌟 Advanced Physics Features
-- **Dynamic Gravity Modelling:** Computes variable gravitational pull continuously using the Newton inverse-square law relative to the Earth's radius 6,371 kilometres.
-- **Atmospheric Density Decay:** Simulates air resistance variations using an exponential decay model based on an 8.5 kilometers atmosphere scale height.
-- **Aerodynamic Drag Calculations:** Factors in cross-sectional surface area, dynamic pressure velocities, and drag coefficients to calculate total Drag Newtons.
-- **Mission Evaluation Logic:** Automatically assesses mission status milestones, tracking structural performance, launchpad clearance, and Karman Line 100 kilometers boundaries.
-- **Telemetry Visualisations:** Features integrated data-plotting algorithms to review flight paths side-by-side.
+This repository/branch represents **Phase 2 (Reworked)** of the simulator. It implements multi-stage mass jettison, a dual-body gravitational environment, and precise orbital insertion telemetry tracking.
+
+---
+
+## 🔄 What's New in Version 2.0
+* **Multi-Phase Architecture:** Simulates 6 distinct, sequential mission phases from pad-clearance to lunar touchdown.
+* **Dual-Body Gravity Environment:** Introduces combined Earth and Moon gravity fields using the Newton inverse-square law, mapping the transition through the Moon's Sphere of Influence (SOI).
+* **Multi-Stage Mass Jettison:** Dynamically drops staging structures to calculate accurate instantaneous mass changes.
+* **Telemetry Enhancements:** Tracks continuous G-load metrics and calculates precise Tsiolkovsky $\Delta v$ budgets per stage.
+
+---
+
+## 🌌 The 6 Flight Profiles Modelled
+1. **S-IC Launch:** Stage 1 booster ignition through Earth's dense atmospheric layers.
+2. **S-II Ascent:** Stage 2 burn pushing the vehicle to Low Earth Orbit (LEO) conditions ($185\text{ km}$, $\approx 7,797\text{ m/s}$).
+3. **TLI Burn (S-IVB):** Translunar Injection accelerating the craft to $\approx 11,050\text{ m/s}$.
+4. **Translunar Coast:** A free-flight path navigating the gravitational pull of both bodies over short time steps.
+5. **LOI Burn:** Lunar Orbit Insertion deceleration into Low Lunar Orbit (LLO) at $110\text{ km}$.
+6. **Lunar Descent:** Final powered brake deployment down to the Moon's surface.
+
+---
+
+## 🌟 Advanced Physics & Engineering Models
+* **Variable Gravity Profile:** Continuously shifting Earth/Moon gravitational models using active planetary radii calculations.
+* **Exponential Atmospheric Drag:** Simulates Earth-only air resistance boundaries using an $8.5\text{ km}$ atmosphere scale-height model with a hard cutoff boundary at $120\text{ km}$.
+* **Orbital Mechanics Integration:** Utilizes realistic target values ($3,487\text{ m/s}$ TLI / $1,066\text{ m/s}$ LOI) calibrated to precise two-body celestial physics.
+
+---
 
 ## 🛠️ Tech Stack & Prerequisites
-- **Language:** Python 3.14
-- **Core Libraries:** `dataclasses`, `math`
-- **Optional Visualisation:** `matplotlib` (For generating flight trajectory graphs)
+* **Language:** Python 3.14+ (Leveraging advanced typing like `__future__.annotations`)
+* **Core Modules Used:** `dataclasses`, `math` (Zero external installation required for core calculations)
 
-To install the plotting dependency, run:
-```bash
-pip install matplotlib
-```
+---
 
 ## 🚀 How to Run the Simulation
+1. Download or switch to this reworked repository.
+2. Open your terminal and run the main entry-point script:
+   ```bash
+   python moon_simulation.py
+   ```
 
-1. Clone or download this repository.
-2. Execute the script in your terminal:
-```bash
-python rocket_simulation.py
-```
-3. Follow the interactive CLI prompts to configure custom inputs (Dry mass, Fuel mass, Burn rates, Exhaust velocity, etc.) or press `Enter` to use the built-in engineering defaults.
+---
 
-## 📊 Sample Output Format
-The simulator outputs an evaluation summary alongside a data stride matrix mapping:
-`Time (s) | Altitude (m) | Velocity (m/s) | Acceleration (m/s²) | Fuel (kg) | Drag (N)`
+## 📊 Telemetry Output Stride Matrix
+The flight data structure tracks metrics frame-by-frame across all phases: 
+`Phase | Time (s) | Altitude (m) | Velocity (m/s) | Acceleration (m/s²) | Fuel (kg) | Drag (N) | G-Force`
